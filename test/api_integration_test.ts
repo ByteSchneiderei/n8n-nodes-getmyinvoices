@@ -1,3 +1,4 @@
+/* eslint-disable @n8n/community-nodes/no-restricted-globals */
 /**
  * Aufruf: GMI_API_KEY=dein_key npx ts-node test/api_integration_test.ts
  */
@@ -20,6 +21,17 @@ const resources = [
     { name: 'Countries', endpoint: '/countries' },
 ];
 
+interface GmiRecord {
+    bankAccountUid?: number;
+    [key: string]: unknown;
+}
+
+interface GmiResponse {
+    records?: GmiRecord[];
+    data?: GmiRecord[];
+    errors?: Array<{ code: number; detail: string }>;
+}
+
 async function runFullIntegrationTest() {
     console.log('🚀 Starting Full GetMyInvoices API Test (Detailed Mode)...\n');
 
@@ -31,7 +43,7 @@ async function runFullIntegrationTest() {
                 headers: { 'X-API-KEY': API_KEY as string },
             });
 
-            const body = await response.json() as any;
+            const body = await response.json() as GmiResponse;
 
             if (response.ok) {
                 // Logik zur Bestimmung des Datenfeldes
@@ -78,7 +90,7 @@ async function testTransactions(uid: number) {
     const response = await fetch(`${BASE_URL}/bankTransactions?${query.toString()}`, {
         headers: { 'X-API-KEY': API_KEY as string },
     });
-    const body = await response.json() as any;
+    const body = await response.json() as GmiResponse;
 
     if (response.ok) {
         console.log(`✅ Transactions: Found ${body.records?.length || 0} items.`);
