@@ -8,7 +8,7 @@ import {
 export class GetMyInvoicesApi implements ICredentialType {
     name = 'getMyInvoicesApi';
     displayName = 'GetMyInvoices API';
-    icon: Icon = { light: 'file:../icons/getmyinvoices_logo.svg' };
+    icon: Icon = 'file:../icons/getmyinvoices_logo.svg';
     documentationUrl = 'https://api.getmyinvoices.com/accounts/v3/doc/index.html';
 
     properties: INodeProperties[] = [
