@@ -1,0 +1,17 @@
+{
+  "node": "n8n-nodes-getmyinvoices",
+  "nodeVersion": "1.0",
+  "codexVersion": "1.0",
+  "resources": {
+    "credentialDocumentation": [
+      {
+        "url": "https://api.getmyinvoices.com/accounts/v3/doc/index.html#tag/Overview"
+      }
+    ],
+    "primaryDocumentation": [
+      {
+        "url": "https://api.getmyinvoices.com/accounts/v3/doc/index.html"
+      }
+    ]
+  }
+}
