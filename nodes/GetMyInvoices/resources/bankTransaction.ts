@@ -52,10 +52,26 @@ export const bankTransactionDescription: INodeProperties[] = [
         },
         routing: {
             send: {
-                type: 'query',
-                property: 'bankAccountsUid[]',
-                value: '={{$value.split(",").map(id => parseInt(id.trim(), 10))}}',
+                preSend: [
+                    async function(this, requestOptions) {
+                        const value = this.getNodeParameter('bankAccountsUid', '') as string;
+                        if (value) {
+                            // 1. IDs säubern und in Array wandeln
+                            const ids = value.split(',')
+                                .map(id => id.trim())
+                                .filter(id => id.length > 0);
 
+                            // 2. Query-String manuell bauen, um n8n-Indizes zu verhindern
+                            // Ergebnis: bankAccountsUid[]=123&bankAccountsUid[]=456
+                            const queryPart = ids.map(id => `bankAccountsUid[]=${id}`).join('&');
+
+                            // 3. An URL anhängen
+                            const separator = requestOptions.url.includes('?') ? '&' : '?';
+                            requestOptions.url += `${separator}${queryPart}`;
+                        }
+                        return requestOptions;
+                    },
+                ],
             },
         },
     },
