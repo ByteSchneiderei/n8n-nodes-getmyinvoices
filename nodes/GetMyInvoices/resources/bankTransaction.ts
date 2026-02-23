@@ -54,8 +54,11 @@ export const bankTransactionDescription: INodeProperties[] = [
             send: {
                 preSend: [
                     async function(this, requestOptions) {
-                        const value = this.getNodeParameter('bankAccountsUid', '') as string;
-                        if (value) {
+                        // Den Wert holen und sicherstellen, dass es ein String ist
+                        const rawValue = this.getNodeParameter('bankAccountsUid', '');
+                        const value = String(rawValue); // <--- Das hier erzwingt den String-Typ
+
+                        if (value && value.trim().length > 0) {
                             // 1. IDs säubern und in Array wandeln
                             const ids = value.split(',')
                                 .map(id => id.trim())
