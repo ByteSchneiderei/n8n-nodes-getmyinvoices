@@ -29,6 +29,14 @@ export const metaDescription: INodeProperties[] = [
                 },
             },
             {
+                name: 'Get Document Types',
+                value: 'getDocumentTypes',
+                action: 'Get all document types',
+                routing: {
+                    request: { method: 'GET', url: '/documentTypes' },
+                },
+            },
+            {
                 name: 'Get Payment Methods',
                 value: 'getPaymentMethods',
                 action: 'Get all payment methods',
@@ -42,14 +50,6 @@ export const metaDescription: INodeProperties[] = [
                 action: 'Get all tax rates',
                 routing: {
                     request: { method: 'GET', url: '/taxRates' },
-                },
-            },
-            {
-                name: 'Get Document Types',
-                value: 'getDocumentTypes',
-                action: 'Get all document types',
-                routing: {
-                    request: { method: 'GET', url: '/documentTypes' },
                 },
             },
         ],
