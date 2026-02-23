@@ -1,5 +1,5 @@
 {
-  "name": "n8n-nodes-getmyinvoices",
+  "name": "@byteschneiderei/n8n-nodes-getmyinvoices",
   "version": "0.1.0",
   "description": "n8n node for GetMyInvoices API",
   "license": "MIT",
@@ -14,6 +14,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/ByteSchneiderei/n8n-nodes-getmyinvoices.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ByteSchneiderei/n8n-nodes-getmyinvoices/issues"
   },
   "scripts": {
     "build": "n8n-node build",
