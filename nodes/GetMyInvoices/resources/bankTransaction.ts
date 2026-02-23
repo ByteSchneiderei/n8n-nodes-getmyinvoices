@@ -54,7 +54,7 @@ export const bankTransactionDescription: INodeProperties[] = [
             send: {
                 type: 'query',
                 property: 'bankAccountsUid[]',
-                value: '={{$value.split(",").map(id => parseInt(id.trim()))}}',
+                value: '={{$value.split(",").map(id => parseInt(id.trim(), 10))}}',
             },
         },
     },
