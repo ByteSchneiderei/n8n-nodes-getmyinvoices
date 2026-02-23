@@ -4,13 +4,11 @@ import {
     type INodeTypeDescription,
 } from 'n8n-workflow';
 
-// Vorhandene Ressourcen
+
 import { documentDescription } from './resources/document';
 import { companyDescription } from './resources/company';
 import { bankAccountDescription } from './resources/bankAccount';
 import { attachmentDescription } from './resources/attachment';
-
-// NEUE Ressourcen
 import { bankTransactionDescription } from './resources/bankTransaction';
 import { syncAccountDescription } from './resources/syncAccount';
 import { metaDescription } from './resources/meta';

@@ -71,6 +71,10 @@ export const bankTransactionDescription: INodeProperties[] = [
                 displayName: 'Limit',
                 name: 'limit',
                 type: 'number',
+                typeOptions: {
+                    minValue: 1,
+                },
+                description: 'Max number of results to return',
                 default: 50,
                 routing: { send: { type: 'query', property: 'per_page' } },
             },
