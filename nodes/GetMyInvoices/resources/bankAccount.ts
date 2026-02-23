@@ -17,7 +17,20 @@ export const bankAccountDescription: INodeProperties[] = [
                 value: 'getAll',
                 action: 'Get many bank accounts',
                 routing: {
-                    request: { method: 'GET', url: '/bankAccounts' },
+                    request: {
+                        method: 'GET',
+                        url: '/bankAccounts',
+                    },
+                    output: {
+                        postReceive: [
+                            {
+                                type: 'rootProperty',
+                                properties: {
+                                    property: 'records',
+                                },
+                            },
+                        ],
+                    },
                 },
             },
             {

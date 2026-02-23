@@ -1,4 +1,4 @@
-import type { INodeProperties } from 'n8n-workflow';
+import type {INodeProperties} from 'n8n-workflow';
 
 export const bankTransactionDescription: INodeProperties[] = [
     {
@@ -17,11 +17,46 @@ export const bankTransactionDescription: INodeProperties[] = [
                 value: 'getAll',
                 action: 'Get many bank transactions',
                 routing: {
-                    request: { method: 'GET', url: '/bankTransactions' },
+                    request: {
+                        method: 'GET',
+                        url: '/bankTransactions',
+                    },
+                    output: {
+                        postReceive: [
+                            {
+                                type: 'rootProperty',
+                                properties: {
+                                    property: 'records',
+                                },
+                            },
+                        ],
+                    },
                 },
             },
         ],
         default: 'getAll',
+    },
+    {
+        displayName: 'Bank Account UIDs',
+        name: 'bankAccountsUid',
+        type: 'string',
+        default: '',
+        required: true,
+        placeholder: 'e.g. 5, 10, 15',
+        description: 'The unique identifiers of the bank accounts (comma-separated)',
+        displayOptions: {
+            show: {
+                resource: ['bankTransaction'],
+                operation: ['getAll'],
+            },
+        },
+        routing: {
+            send: {
+                type: 'query',
+                property: 'bankAccountsUid[]',
+                value: '={{$value.split(",").map(id => parseInt(id.trim()))}}',
+            },
+        },
     },
     {
         displayName: 'Filters',
@@ -36,20 +71,6 @@ export const bankTransactionDescription: INodeProperties[] = [
             },
         },
         options: [
-            {
-                displayName: 'Bank Account UIDs',
-                name: 'bankAccountsUid',
-                type: 'string',
-                default: '',
-                description: 'Comma-separated list of Bank Account UIDs',
-                routing: {
-                    send: {
-                        type: 'query',
-                        property: 'bankAccountsUid[]',
-                        value: '={{$value.split(",").map(id => id.trim())}}',
-                    },
-                },
-            },
             {
                 displayName: 'End Date Filter',
                 name: 'endDateFilter',
