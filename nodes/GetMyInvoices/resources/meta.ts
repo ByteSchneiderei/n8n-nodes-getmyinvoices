@@ -13,7 +13,15 @@ export const metaDescription: INodeProperties[] = [
         },
         options: [
             {
-                name: 'Get Countries',
+                name: 'Get Account Details',
+                value: 'getAccount',
+                action: 'Get account details',
+                routing: {
+                    request: { method: 'GET', url: '/account' },
+                },
+            },
+            {
+                name: 'Get All Countries',
                 value: 'getCountries',
                 action: 'Get all countries',
                 routing: {
@@ -21,7 +29,7 @@ export const metaDescription: INodeProperties[] = [
                 },
             },
             {
-                name: 'Get Currencies',
+                name: 'Get All Currencies',
                 value: 'getCurrencies',
                 action: 'Get all currencies',
                 routing: {
@@ -29,30 +37,68 @@ export const metaDescription: INodeProperties[] = [
                 },
             },
             {
-                name: 'Get Document Types',
-                value: 'getDocumentTypes',
-                action: 'Get all document types',
+                name: 'Get All Desktop Portals',
+                value: 'getDesktopPortals',
+                action: 'Get all desktop portals',
                 routing: {
-                    request: { method: 'GET', url: '/documentTypes' },
+                    request: { method: 'GET', url: '/desktopPortals' },
                 },
             },
             {
-                name: 'Get Payment Methods',
-                value: 'getPaymentMethods',
-                action: 'Get all payment methods',
+                name: 'Get All Tags',
+                value: 'getTags',
+                action: 'Get all tags',
                 routing: {
-                    request: { method: 'GET', url: '/paymentMethods' },
+                    request: { method: 'GET', url: '/tags' },
                 },
             },
             {
-                name: 'Get Tax Rates (VAT)',
-                value: 'getTaxRates',
-                action: 'Get all tax rates',
+                name: 'Get All Users',
+                value: 'getUsers',
+                action: 'Get all users',
                 routing: {
-                    request: { method: 'GET', url: '/taxRates' },
+                    request: { method: 'GET', url: '/users' },
+                },
+            },
+            {
+                name: 'Get All Vat Rates',
+                value: 'getVatRates',
+                action: 'Get all vat rates',
+                routing: {
+                    request: { method: 'GET', url: '/vatRates' },
+                },
+            },
+            {
+                name: 'Get Many Portals',
+                value: 'getPortals',
+                action: 'Get many portals',
+                routing: {
+                    request: { method: 'GET', url: '/portals' },
                 },
             },
         ],
-        default: 'getCountries',
+        default: 'getAccount',
+    },
+    {
+        displayName: 'Page Number',
+        name: 'pageNumber',
+        type: 'number',
+        displayOptions: {
+            show: {
+                resource: ['meta'],
+                operation: ['getPortals'],
+            },
+        },
+        typeOptions: {
+            minValue: 1,
+        },
+        default: 1,
+        description: 'If there are more portals than the 500 limit you can use this to get additional pages',
+        routing: {
+            send: {
+                type: 'query',
+                property: 'pageNumber',
+            },
+        },
     },
 ];

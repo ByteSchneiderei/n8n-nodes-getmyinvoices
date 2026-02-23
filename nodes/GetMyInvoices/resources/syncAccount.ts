@@ -17,32 +17,67 @@ export const syncAccountDescription: INodeProperties[] = [
                 value: 'getAll',
                 action: 'Get many sync accounts',
                 routing: {
-                    request: { method: 'GET', url: '/syncAccounts' },
-                },
-            },
-            {
-                name: 'Get',
-                value: 'get',
-                action: 'Get a sync account',
-                routing: {
-                    request: { method: 'GET', url: '=/syncAccounts/{{$parameter.syncAccountId}}' },
+                    request: {
+                        method: 'GET',
+                        url: '/syncAccounts',
+                    },
                 },
             },
         ],
         default: 'getAll',
     },
     {
-        displayName: 'Sync Account ID',
-        name: 'syncAccountId',
-        type: 'string',
-        required: true,
+        displayName: 'Filters',
+        name: 'filters',
+        type: 'collection',
+        placeholder: 'Add Filter',
+        default: {},
         displayOptions: {
             show: {
                 resource: ['syncAccount'],
-                operation: ['get'],
+                operation: ['getAll'],
             },
         },
-        default: '',
-        description: 'The ID of the sync account to retrieve',
+        options: [
+            {
+                displayName: 'Search Filter',
+                name: 'searchFilter',
+                type: 'string',
+                default: '',
+                description: 'Search sync accounts by name',
+                routing: {
+                    send: {
+                        type: 'query',
+                        property: 'searchFilter',
+                    },
+                },
+            },
+            {
+                displayName: 'Status Filter',
+                name: 'statusFilter',
+                type: 'string',
+                default: '',
+                description: 'Search sync status (e.g., Active, Inactive)',
+                routing: {
+                    send: {
+                        type: 'query',
+                        property: 'statusFilter',
+                    },
+                },
+            },
+            {
+                displayName: 'Type Filter',
+                name: 'typeFilter',
+                type: 'string',
+                default: '',
+                description: 'Search sync type (e.g., Import, Export)',
+                routing: {
+                    send: {
+                        type: 'query',
+                        property: 'typeFilter',
+                    },
+                },
+            },
+        ],
     },
 ];
