@@ -8,7 +8,6 @@ import {
 import { documentDescription } from './resources/document';
 import { companyDescription } from './resources/company';
 import { bankAccountDescription } from './resources/bankAccount';
-import { attachmentDescription } from './resources/attachment';
 import { bankTransactionDescription } from './resources/bankTransaction';
 import { syncAccountDescription } from './resources/syncAccount';
 import { metaDescription } from './resources/meta';
@@ -48,7 +47,6 @@ export class GetMyInvoices implements INodeType {
                 type: 'options',
                 noDataExpression: true,
                 options: [
-                    { name: 'Attachment', value: 'attachment' },
                     { name: 'Bank Account', value: 'bankAccount' },
                     { name: 'Bank Transaction', value: 'bankTransaction' },
                     { name: 'Company', value: 'company' },
@@ -58,7 +56,6 @@ export class GetMyInvoices implements INodeType {
                 ],
                 default: 'document',
             },
-            ...attachmentDescription,
             ...bankAccountDescription,
             ...bankTransactionDescription,
             ...companyDescription,
